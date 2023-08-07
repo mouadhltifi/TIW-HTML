@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>pagina degli articoli</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/standard.css" th:href="@{/css/standard.css}" />
+</head>
+<body>
+
+<div align="right">
+
+    <a th:href="@{/logout(from='homePge')}" data-th-utext='${lang.getString("logout")}'
+       class="logoutPanel">Logout</a>
+</div>
+
+
+<div align="center" class="homepage">
+    <a th:href="@{/GoToHome(from='homePge')}" data-th-utext='${lang.getString("backHomepage")} '>Home</a>
+    <a th:href="@{/GoToShoppingCart(from='homePge')}" data-th-utext='${lang.getString("shoppingCart")}'>Carrello</a>
+    <a th:href="@{/GotoOrders(from='homePge')}" data-th-utext='${lang.getString("orderPage")} '>Ordini</a>
+</div>
+
+<br><br><br><br><br><br><br>
+
+
+<table border="1"  align="center" th:if="${!emptyCart}">
+
+    <tr>
+        <th>Nome venditore</th>
+        <th>prezzo totale</th>
+        <th>costo spedizione</th>
+        <th>articoli</th>
+        <th>ordina </th>
+    </tr>
+    <tr  th:each="cart : ${cartList}">
+        <td  th:text="${cart.getSeller().getName()}">nome venditore </td>
+        <td th:text="${cart.getTotalPrice()}">prezzo totale </td>
+        <td  th:text="${((cart.getShippingPrice()==0.0) ? 'gratuita' : cart.getShippingPrice())}">costo spedizone </td>
+        <td>
+            <table  align="center">
+                <tbody>
+                <tr th:each="item : ${cart.getItem()}">
+                    <td valign="center" th:text="${item.getName()}">nome articolo"</td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>  <form method="get" th:attr="action=@{/handleCartUpdate}">
+            <input type="hidden" name="sellerdID" th:value="${cart.getSeller().getSellerId()}">
+        <!--            <input type="hidden" name="hashCode" th:value="${hashCode}">-->
+            <input type="hidden" name="hashCode" th:value="${cartList.hashCode()}">
+            <button type="submit" th:value='${lang.getString("purchase")}'>aggiungi</button>
+        </form></td>
+    </tr>
+</table>
+
+
+
+</body>
+</html>

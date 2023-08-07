@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>pagina degli articoli</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/standard.css" th:href="@{/css/standard.css}"/>
+</head>
+<body>
+
+
+<h1 align="center">LIST OF ITEMS</h1>
+
+
+<div align="right">
+
+    <a th:href="@{/logout(from='homePge')}" data-th-utext='${lang.getString("logout")}'
+       class="logoutPanel">Logout</a>
+</div>
+
+
+<div align="center" class="homepage">
+    <a th:href="@{/GoToHome(from='homePge')}" data-th-utext='${lang.getString("backHomepage")} '>Home</a>
+    <a th:href="@{/GoToShoppingCart(from='homePge')}" data-th-utext='${lang.getString("shoppingCart")}'>Carrello</a>
+    <a th:href="@{/GotoOrders(from='homePge')}" data-th-utext='${lang.getString("orderPage")} '>Ordini</a>
+</div>
+
+<br><br><br><br><br><br><br>
+
+
+<!--prima versione della pagine , ricerca oggetti-->
+
+<div th:align="center" th:if="${firstVersionPage}">
+
+    <div align="center" >
+
+        <div th:if="${noItemFound}">
+            <h2>
+                <a th:href="@{/GoToHome(from='homePge')}" data-th-utext='${lang.getString("NoItemFound")} '>No item found</a>
+            </h2>
+        </div>
+
+        <div th:unless="${noItemFound}">
+            <table th:border="2" >
+
+                <!--                intestazione tabella-->
+                <tr>
+                    <th>id</th>
+                    <th>nome</th>
+                    <th>descrizione</th>
+                    <th>prezzo minimo</th>
+                    <th>dettagli</th>
+                </tr>
+
+
+                <tr  th:block th:each="i: ${#numbers.sequence(0,itemList.size()-1)}">
+
+                    <td valign="center" th:text="${itemList.get(i).getId_item()}">01</td>
+                    <td valign="center" th:text="${itemList.get(i).getName}">moka da caffè</td>
+                    <td valign="center" th:text="${itemList.get(i).getDescription()}">cucina</td>
+                    <td valign="center" th:text="${prices.get(i)}">100.00</td>
+                    <td>
+
+                        <!--                        richiesta maggiori dettagli-->
+                        <a href="/ItemDetails" th:href="@{/ItemDetails(itemId=${itemList.get(i).getId_item()})}">
+                            <input type="submit" th:value='${lang.getString("ItemDetails")}'>
+                        </a>
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+
+        </tr>
+    </div>
+
+</div>
+
+
+<div align="center" th:if="${secondVersionPage}">
+    <h2>Seconda versione della pagina </h2> <br>
+
+    <!--    informazioni dettagliate oggetto selezionato-->
+    <table align="center" border="1" th:name="itemDetails">
+
+        <tr>
+            <th>id ordine</th>
+            <th>nome</th>
+            <th>descrizione</th>
+            <th>categoria</th>
+            <th>foto</th>
+        </tr>
+        <tr>
+            <td valign="center" th:text="${selectedItem.getId_item()}">1</td>
+            <td valign="center" th:text="${selectedItem.getName()}">caffettiera</td>
+            <td valign="center" th:text="${selectedItem.getDescription()}">super utile</td>
+            <td valign="center" th:text="${selectedItem.getCategory()}">cucina</td>
+            <td><img alt="" border=2 height=100 width=100 th:src="@{'data:image/jpeg;base64,'+${selectedItem.getImage()}}">
+            </td>
+        </tr>
+    </table>
+
+
+
+    <!--venditori-->
+
+    <h2>Venduto da</h2>
+
+
+    <div th:if="${!sellers.isEmpty()}">
+        <table border="1" align="center">
+
+            <thead>
+            <tr>
+                <th>id venditore</th>
+                <th>nome</th>
+                <th>valutazione</th>
+                <th>prezzo</th>
+                <th>gratis da</th>
+                <th>valore nel carrello</th>
+                <th>quantità nel carrello</th>
+                <th>aggiungi al carrello</th>
+                <th>Politiche di spedizione</th>
+            </tr>
+            </thead>
+
+            <tbody th:border="3" th:each="i: ${#numbers.sequence(0,sellers.size()-1)}">
+            <tr th:block >
+                <td valign="center" th:text="${'codice: ' + sellers.get(i).getSellerId()}">id venditore</td>
+                <td valign="center" th:text="${sellers.get(i).getName()}">nome venditore</td>
+                <td valign="center" th:text="${'ratio: ' + sellers.get(i).getRating()}">rating</td>
+                <td valign="center" th:text="${prices.get(i) + ' &euro;'}">prezzo </td>
+                <td valign="center" th:text="${sellers.get(i).getFreeShipment()}">spedizione gratuita</td>
+
+                <!--                da fare , usare sessione e cookies-->
+<!--                <td valign="center" ><p style="background-color:Tomato;">da fare</p>-->
+                <th:block  valign="center" th:if="${pricesOnCart!=null && pricesOnCart.containsKey(sellers.get(i).sellerId)}">
+                        <td valign="center" th:text="${(pricesOnCart.get(sellers.get(i).sellerId)).get(0)}">23.35</td>
+                        <td valign="center" th:text="${((pricesOnCart.get(sellers.get(i).sellerId)).get(1))}">24.35</td>
+                </th:block>
+                <th:block th:unless="${pricesOnCart!=null && pricesOnCart.containsKey(sellers.get(i).sellerId)}">
+                    <td>0.0</td>
+                    <td>0</td>
+                </th:block>
+<!--                <td valign="center" th:unless="${pricesOnCart!=null && pricesOnCart.containsKey(sellers.get(i).sellerId)}" th:text="-.-">0.0</td>-->
+
+                <td>
+                    <!--                        <a href="/AddToCart" th:href="@{/AddToCart(idInVendita=${id_in_vendita.get(i)})}">-->
+                    <!--                            <input type="submit" th:value='${lang.getString("ItemDetails")}'>-->
+                    <!--                        </a>-->
+                    <form method="POST" th:attr="action=@{/addToCart}">
+                        <input type="number" min="0" name="qty"  required/>
+                        <input type="hidden" name="id_in_vendita" th:value="${id_in_vendita.get(i)}">
+                        <input type="hidden" name="itemId" th:value="${selectedItem.getId_item()}">
+
+                        <input type="hidden" name="sellerdID" th:value="${sellers.get(i).getSellerId()}">
+                        <input type="hidden" name="hashCode" th:value="${hashCode}">
+
+                        <button type="submit" th:value='${lang.getString("AddToCart")}'>aggiungi</button>
+                    </form>
+                </td>
+                <td>
+                    <!--politiche di spedizione -->
+                    <table  align="center" th:if="${!sellers.get(i).getsPolicy().isEmpty()}">
+
+                        <thead>
+                        <tr>
+                            <th>numero minimo articoli </th>
+                            <th>numero massimo articoli</th>
+                            <th>prezzo spedizione fascia </th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="policy :${sellers.get(i).getsPolicy()}">
+                            <td valign="center" th:text= " ${policy.getMinItems()}">2</td>
+                            <td valign="center" th:text="${policy.getMaxItems()}">5</td>
+                            <td valign="center" th:text=" ${policy.getPrice()}">5.99</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div th:unless="${!sellers.isEmpty()}">
+
+        <h2>
+            <a th:href="@{/GoToHome(from='homePge')}" data-th-utext='${lang.getString("OutOfStock")} '>No item found</a>
+        </h2>
+
+    </div>
+</div>
+
+
+</body>
+</html>
+
+

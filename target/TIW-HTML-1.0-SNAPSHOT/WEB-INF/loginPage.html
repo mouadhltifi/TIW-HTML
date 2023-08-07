@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login page</title>
+    <meta charset="UTF-8"/>
+<!--    <link rel="stylesheet" type="text/css" href="../css/standard.css" th:href="@{../css/standard.css}" />-->
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/standard.css" th:href="@{/css/standard.css}" />
+</head>
+
+<body>
+
+    <div class="centeredMain">
+        <div class="centeredMainBlock loginBlock">
+            <form method="POST" th:attr="action=@{/checkLogin}">
+                <p class="error" data-th-class="${loginError}? 'error' : 'hidden'" data-th-utext='${lang.getString("errorLogin")}'>The user doesn't exist or you've forgot the password.</p>
+                <input type="text" name="email" placeholder="email"  th:placeholder='${lang.getString("loginCode")}' required/>
+                <input type="password" name="password" placeholder="Password"  th:placeholder='${lang.getString("loginPassword")}' required/>
+                <input type="submit" name="login" value="Accesso" />
+            </form>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

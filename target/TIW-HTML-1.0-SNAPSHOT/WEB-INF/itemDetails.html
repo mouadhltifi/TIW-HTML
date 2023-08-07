@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+    <title>pagina degli articoli</title>
+  <link rel="stylesheet" type="text/css" media="all"
+        href="../css/standard.css" th:href="@{/css/standard.css}" />
+</head>
+<body>
+<table>
+  <caption>List of items</caption>
+  <thead>
+  <tr>
+    <th>nome</th>
+    <th>descrizione</th>
+  </tr>
+  </thead>
+  <tbody>
+  <div align="right">
+
+    <a th:href="@{/logout(from='homePge')}" data-th-utext='${lang.getString("logout")}' class="logoutPanel">Logout</a>
+  </div>
+
+
+  <div align="center" class="homepage">
+    <a th:href="@{/GoToHome(from='homePge')}"   data-th-utext='${lang.getString("backHomepage")} ' >Home</a>
+    <a th:href="@{/GoToShoppingCart(from='homePge')}"  data-th-utext='${lang.getString("shoppingCart")}'>Carrello</a>
+    <a th:href="@{/GotoOrders(from='homePge')}" data-th-utext='${lang.getString("orderPage")} '>Ordini</a>
+  </div>
+
+
+
+
+
+  </tbody>
+</table>
+</body>
+</html>

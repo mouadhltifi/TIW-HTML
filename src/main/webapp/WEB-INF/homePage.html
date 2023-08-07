@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/standard.css" th:href="@{/css/standard.css}" />
+</head>
+<body>
+
+<div align="right">
+
+    <a th:href="@{/logout(from='homePge')}" data-th-utext='${lang.getString("logout")}' class="logoutPanel">Logout</a>
+</div>
+
+
+<div align="center" class="homepage">
+    <a th:href="@{/GoToHome(from='homePge')}"   data-th-utext='${lang.getString("backHomepage")} ' >Home</a>
+    <a th:href="@{/GoToShoppingCart(from='homePge')}"  data-th-utext='${lang.getString("shoppingCart")}'>Carrello</a>
+    <a th:href="@{/GotoOrders(from='homePge')}" data-th-utext='${lang.getString("orderPage")} '>Ordini</a>
+</div>
+
+<h2>E-commerce tiw</h2>
+<p th:text="${'Nice to see you again ' + session.user.name + ' ' + session.user.surname}"></p>
+
+<div class="topnav">
+
+    <form method="post" action="/searchItems" th:attr="action=@{/searchItems}">
+        <input type="text" placeholder="Ricerca oggetti" name="key">
+        <input type="submit">
+    </form>
+</div>
+
+
+
+<table align="center">
+    <tr>
+        <th>Nome</th>
+        <th>descrizione</th>
+        <th>categoria</th>
+        <th>immagine</th>
+
+    </tr>
+    <tr th:each="item :${itemList}">
+        <td valign="center" th:text="${item.getName()}">nome prodotto</td>
+        <td valign="center" th:text="${item.getDescription()}">descrizione</td>
+        <td valign="center" th:text="${item.getCategory()}">categoria</td>
+        <td><img alt="" border=2 height=100 width=100  th:src="@{'data:image/jpeg;base64,'+${item.getImage()}}"> </td>
+
+        <td>
+            <a href="/ItemDetails" th:href="@{/ItemDetails(itemId=${item.getId_item()})}">
+                <input type="submit" th:value='${lang.getString("ItemDetails")}'>
+            </a>
+        </td>
+    </tr>
+</table>
+
+
+</body>
+</html>
