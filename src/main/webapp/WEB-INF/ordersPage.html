@@ -1,10 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="ISO-8859-15">
     <title>pagina degli articoli</title>
     <link rel="stylesheet" type="text/css" media="all"
           href="../css/standard.css" th:href="@{/css/standard.css}"/>
+    <style>
+        /* Additional styles can be added here or in the external stylesheet */
+        .right-align {
+            text-align: right;
+        }
+        .center-align {
+            text-align: center;
+        }
+        .topnav input[type="text"] {
+            padding: 10px;
+            margin-right: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -24,7 +47,7 @@
 <br><br><br><br><br><br><br>
 
 
-<h1>WElcome to OrdersPage</h1>
+<h1>Orders</h1>
 
 <table align="center" border="2" th:each="order : ${orderList}">
 

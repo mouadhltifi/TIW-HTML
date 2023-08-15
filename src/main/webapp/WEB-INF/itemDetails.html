@@ -1,13 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="ISO-8859-1">
-    <title>pagina degli articoli</title>
+  <meta charset="ISO-8859-15">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive Design -->
+  <title>Items</title>
   <link rel="stylesheet" type="text/css" media="all"
         href="../css/standard.css" th:href="@{/css/standard.css}" />
+
+  <style>
+    /* Additional styles can be added here or in the external stylesheet */
+    .right-align {
+      text-align: right;
+    }
+    .center-align {
+      text-align: center;
+    }
+    .topnav input[type="text"] {
+      padding: 10px;
+      margin-right: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
-<table>
+<table class="center-align">
   <caption>List of items</caption>
   <thead>
   <tr>
@@ -16,13 +41,13 @@
   </tr>
   </thead>
   <tbody>
-  <div align="right">
+  <div align="right-align">
 
     <a th:href="@{/logout(from='homePge')}" data-th-utext='${lang.getString("logout")}' class="logoutPanel">Logout</a>
   </div>
 
 
-  <div align="center" class="homepage">
+  <div align="center-align" class="homepage">
     <a th:href="@{/GoToHome(from='homePge')}"   data-th-utext='${lang.getString("backHomepage")} ' >Home</a>
     <a th:href="@{/GoToShoppingCart(from='homePge')}"  data-th-utext='${lang.getString("shoppingCart")}'>Carrello</a>
     <a th:href="@{/GotoOrders(from='homePge')}" data-th-utext='${lang.getString("orderPage")} '>Ordini</a>
