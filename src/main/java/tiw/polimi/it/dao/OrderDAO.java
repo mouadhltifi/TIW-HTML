@@ -37,6 +37,8 @@ public class OrderDAO extends GeneralDAO {
         query = "insert into ordine (`data spedizione`, `costo totale`, `indirizzo spedizione`, fornitore, utente) VALUES (?,?,?,?,?)";
 
         try {
+
+            //commit manuale
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setDate(1, calculateShippingDate());
@@ -67,8 +69,8 @@ public class OrderDAO extends GeneralDAO {
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
-        }finally {
             conn.rollback();
+        }finally {
             conn.setAutoCommit(true);
         }
 
@@ -83,7 +85,8 @@ public class OrderDAO extends GeneralDAO {
         java.util.Date date = new java.util.Date();
         Calendar calendar = Calendar.getInstance();
         date = calendar.getTime();
-        return  Date.valueOf(LocalDate.now().plusDays(Math.round((Math.random()*7 +1))));
+        //return  Date.valueOf(LocalDate.now().plusDays(Math.round((Math.random()*7 +1))));
+        return  Date.valueOf(LocalDate.now());
     }
 
     private void insertItems(LightItem lightItem, User user, int lastKey) throws SQLException {

@@ -46,6 +46,7 @@ public class AddToCart extends HttpServletDBConnected{
 
         boolean dataError = false;
         String quantityString = req.getParameter("qty");
+        //identifica l'istanza di un articolo messo in vendita da un determinato fornitore
         String idInVenditaString = req.getParameter("id_in_vendita");
         String itemIdString = req.getParameter("itemId");
         List<ShoppingCart> cartList = (List<ShoppingCart>) req.getSession(false).getAttribute("cart");
@@ -129,6 +130,8 @@ public class AddToCart extends HttpServletDBConnected{
             if(cart.getSeller().getSellerId() == onSale.getSellers().get(0).getSellerId()) {
                 //buying other items from the same seller
                 System.out.println("compro da stesso venditore");
+                //la lista di carrelli è divisa in carrelli dei singoli venditori
+                //ogni carrello di venditore ha la lista dei suoi oggetti
                 cart.updateSellerCart(onSale.getSellers().get(0),quantity,onSale.getItems().get(0),onSale.getPrices().get(0));
                 return;
         }

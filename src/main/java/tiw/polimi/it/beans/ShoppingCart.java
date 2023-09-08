@@ -35,19 +35,23 @@ public class ShoppingCart {
     }
 
     public double getShippingPrice() throws Exception {
-        if (seller.getFreeShipment() >= totalPrice) {
+        if (totalPrice >= seller.getFreeShipment()) {
             return 0.0;
         }
-        for (ShippingPolicy s : seller.getsPolicy()
-        ) {
-            if (this.quantity >= s.getMinItems() && this.quantity <= s.getMaxItems()) {
-                return s.getPrice();
+        else {
+            for (ShippingPolicy s : seller.getsPolicy()
+            ) {
+                if (this.quantity >= s.getMinItems() && this.quantity <= s.getMaxItems()) {
+                    return s.getPrice();
+                }
+
             }
+            System.out.println("fouri da range di politica di spedizione ");
+            return 10.99;
         }
        // throw new Exception("problema con calcolo fascia di spedzione");
 
-        System.out.println("fouri da range di politica di spedizione ");
-        return 10.99;
+
     }
 
     public boolean checkSellerById(int sellerId ){

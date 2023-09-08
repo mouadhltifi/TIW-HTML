@@ -42,7 +42,7 @@ public class SearchItems extends HttpServletDBConnected{
         try {
 
             //itemList = itemDAO.findItemsByKey(keySearch);
-
+            //ogni volta prende l'oggetto dal database invece che usare quello ottenuto dopo la richiesta iniziale
             onSale = onSaleDAO.findElementsByKey(keySearch);
 
 

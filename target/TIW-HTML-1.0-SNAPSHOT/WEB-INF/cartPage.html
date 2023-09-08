@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="ISO-8859-15">
     <title>pagina degli articoli</title>
     <link rel="stylesheet" type="text/css" media="all"
           href="../css/standard.css" th:href="@{/css/standard.css}" />
+    <style>
+        /* Additional styles can be added here or in the external stylesheet */
+        .right-align {
+            text-align: right;
+        }
+        .center-align {
+            text-align: center;
+        }
+        .topnav input[type="text"] {
+            padding: 10px;
+            margin-right: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 
-<div align="right">
+<div align="right-align">
 
     <a th:href="@{/logout(from='homePge')}" data-th-utext='${lang.getString("logout")}'
        class="logoutPanel">Logout</a>

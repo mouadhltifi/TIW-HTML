@@ -178,6 +178,7 @@
                         <input type="hidden" name="itemId" th:value="${selectedItem.getId_item()}">
 
                         <input type="hidden" name="sellerdID" th:value="${sellers.get(i).getSellerId()}">
+                        <!-- per non calcolare il check di prezzo nel carrello, se prezzo modificatp hash non combacia -->
                         <input type="hidden" name="hashCode" th:value="${hashCode}">
 
                         <button type="submit" th:value='${lang.getString("AddToCart")}'>aggiungi</button>

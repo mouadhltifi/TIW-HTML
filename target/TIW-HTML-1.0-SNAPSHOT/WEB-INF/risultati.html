@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="ISO-8859-15">
     <title>pagina degli articoli</title>
     <link rel="stylesheet" type="text/css" media="all"
           href="../css/standard.css" th:href="@{/css/standard.css}"/>
+    <style>
+        /* Additional styles can be added here or in the external stylesheet */
+        .right-align {
+            text-align: right;
+        }
+        .center-align {
+            text-align: center;
+        }
+        .topnav input[type="text"] {
+            padding: 10px;
+            margin-right: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 
 
-<h1 align="center">LIST OF ITEMS</h1>
+<h1 align="center-align">Item details</h1>
 
 
-<div align="right">
+<div align="right-align">
 
     <a th:href="@{/logout(from='homePge')}" data-th-utext='${lang.getString("logout")}'
        class="logoutPanel">Logout</a>
@@ -32,7 +55,7 @@
 
 <div th:align="center" th:if="${firstVersionPage}">
 
-    <div align="center" >
+    <div align="center-align" >
 
         <div th:if="${noItemFound}">
             <h2>
@@ -55,10 +78,10 @@
 
                 <tr  th:block th:each="i: ${#numbers.sequence(0,itemList.size()-1)}">
 
-                    <td valign="center" th:text="${itemList.get(i).getId_item()}">01</td>
-                    <td valign="center" th:text="${itemList.get(i).getName}">moka da caffè</td>
-                    <td valign="center" th:text="${itemList.get(i).getDescription()}">cucina</td>
-                    <td valign="center" th:text="${prices.get(i)}">100.00</td>
+                    <td valign="center-align" th:text="${itemList.get(i).getId_item()}">01</td>
+                    <td valign="center-align" th:text="${itemList.get(i).getName}">moka da caffè</td>
+                    <td valign="center-align" th:text="${itemList.get(i).getDescription()}">cucina</td>
+                    <td valign="center-align" th:text="${prices.get(i)}">100.00</td>
                     <td>
 
                         <!--                        richiesta maggiori dettagli-->
@@ -155,6 +178,7 @@
                         <input type="hidden" name="itemId" th:value="${selectedItem.getId_item()}">
 
                         <input type="hidden" name="sellerdID" th:value="${sellers.get(i).getSellerId()}">
+                        <!-- per non calcolare il check di prezzo nel carrello, se prezzo modificatp hash non combacia -->
                         <input type="hidden" name="hashCode" th:value="${hashCode}">
 
                         <button type="submit" th:value='${lang.getString("AddToCart")}'>aggiungi</button>

@@ -93,7 +93,7 @@ public class GetItemDetails extends HttpServletDBConnected {
             userItemId = Integer.parseInt(req.getParameter("itemId"));
 
             if (userItemId < 0) {
-
+                //se mette quantità negativa non è valido
                 System.out.println("userItemId < 0");
                 resp.sendRedirect("/error?code=500");
             }
@@ -121,9 +121,11 @@ public class GetItemDetails extends HttpServletDBConnected {
             }
             System.out.println(onSale.getIds_inVendita());
 
+            //prende dai coockie il carrello dell'utente
             List<ShoppingCart> cartList = (List<ShoppingCart>) req.getSession(false).getAttribute("cart");
-
+            // calcolo il var già contenuto nel carrello di quell'articolo da quel fornitore e lo mappo col seller id
             HashMap<Integer,List<Double>> pricesOnCart = prepareHashMap_SellerId_TotalPrice(cartList,onSale.getSellers());
+
 
 
 

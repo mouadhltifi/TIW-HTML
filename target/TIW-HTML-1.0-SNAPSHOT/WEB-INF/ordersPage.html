@@ -67,6 +67,7 @@
                     <th>Shipping date</th>
                     <th>address</th>
                     <th>order Id</th>
+                    <th>Price</th>
                 </tr>
                 </thead>
 
@@ -79,10 +80,13 @@
                         <td th:text="${order.getShippingDate()}">Shipping Date</td>
                         <td th:text="${order.getAddress()}">address</td>
                         <td th:text="${order.getOrderId()}">orderID</td>
+                        <td th:text="${order.getTotalPrice()}">orderID</td>
                     </tr>
+
 
                 </tbody>
             </table>
+
         </td>
     </tr>
 
@@ -107,6 +111,11 @@
             </table>
         </td>
     </tr>
+
+    <br>
+    <br>
+    <br>
+
 
     </tbody>
 </table>
