@@ -22,8 +22,8 @@ public class ShoppingCart {
         return item;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public double getTotalPrice() throws Exception {
+        return totalPrice + this.getShippingPrice();
     }
 
     public int getQuantity() {

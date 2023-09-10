@@ -70,7 +70,9 @@ public class OrderDAO extends GeneralDAO {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
             conn.rollback();
-        }finally {
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
             conn.setAutoCommit(true);
         }
 

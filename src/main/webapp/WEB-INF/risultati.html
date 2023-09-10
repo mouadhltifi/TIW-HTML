@@ -142,7 +142,7 @@
                 <th>prezzo</th>
                 <th>gratis da</th>
                 <th>valore nel carrello</th>
-                <th>quantità nel carrello</th>
+                <th>quantita' nel carrello</th>
                 <th>aggiungi al carrello</th>
                 <th>Politiche di spedizione</th>
             </tr>
@@ -153,7 +153,7 @@
                 <td valign="center" th:text="${'codice: ' + sellers.get(i).getSellerId()}">id venditore</td>
                 <td valign="center" th:text="${sellers.get(i).getName()}">nome venditore</td>
                 <td valign="center" th:text="${'ratio: ' + sellers.get(i).getRating()}">rating</td>
-                <td valign="center" th:text="${prices.get(i) + ' &euro;'}">prezzo </td>
+                <td valign="center" th:text="${prices.get(i) }">prezzo </td>
                 <td valign="center" th:text="${sellers.get(i).getFreeShipment()}">spedizione gratuita</td>
 
                 <!--                da fare , usare sessione e cookies-->

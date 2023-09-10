@@ -154,7 +154,7 @@ public class GetItemDetails extends HttpServletDBConnected {
 
     }
 
-    private HashMap<Integer, List<Double>> prepareHashMap_SellerId_TotalPrice(List<ShoppingCart> cartList, List<Seller> sellers) {
+    private HashMap<Integer, List<Double>> prepareHashMap_SellerId_TotalPrice(List<ShoppingCart> cartList, List<Seller> sellers) throws Exception {
         HashMap<Integer,List<Double>> result = new HashMap<>();
 
         List<Double> qty_totalPrice = new ArrayList<>();
