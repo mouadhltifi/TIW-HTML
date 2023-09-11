@@ -58,7 +58,7 @@
     </tr>
     <tr  th:each="cart : ${cartList}">
         <td  th:text="${cart.getSeller().getName()}">nome venditore </td>
-        <td th:text="${#numbers.formatDecimal(cart.getTotalPrice()-cart.getShippingPrice(), 1, 2)}">prezzo totale </td>
+        <td th:text="${cart.getItemsPrice()}">prezzo totale </td>
         <td  th:text="${((cart.getShippingPrice()==0.0) ? 'gratuita' : cart.getShippingPrice())}">costo spedizone </td>
         <td>
             <table  align="center">

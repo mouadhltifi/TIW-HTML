@@ -170,7 +170,7 @@ public class GetItemDetails extends HttpServletDBConnected {
                 if(seller.getSellerId()==cart.getSeller().getSellerId()) {
                     System.out.println("trovato da stesso venditore");
 
-                    truncatedDouble = BigDecimal.valueOf(cart.getTotalPrice())
+                    truncatedDouble = BigDecimal.valueOf(cart.getItemsPrice())
                             .setScale(3, RoundingMode.HALF_UP)
                             .doubleValue();
 

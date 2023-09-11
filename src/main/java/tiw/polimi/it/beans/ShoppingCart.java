@@ -22,6 +22,9 @@ public class ShoppingCart {
         return item;
     }
 
+    public double getItemsPrice() {
+        return totalPrice;
+    }
     public double getTotalPrice() throws Exception {
         return totalPrice + this.getShippingPrice();
     }
@@ -47,7 +50,7 @@ public class ShoppingCart {
 
             }
             System.out.println("fouri da range di politica di spedizione ");
-            return 10.99;
+            return 5;
         }
        // throw new Exception("problema con calcolo fascia di spedzione");
 
