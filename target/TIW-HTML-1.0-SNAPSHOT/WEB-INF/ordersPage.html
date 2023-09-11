@@ -80,7 +80,8 @@
                         <td th:text="${order.getShippingDate()}">Shipping Date</td>
                         <td th:text="${order.getAddress()}">address</td>
                         <td th:text="${order.getOrderId()}">orderID</td>
-                        <td th:text="${order.getTotalPrice()}">orderID</td>
+                        <td th:text="${#numbers.formatDecimal(order.getTotalPrice(), 0, 2)}">price</td>
+
                     </tr>
 
 
